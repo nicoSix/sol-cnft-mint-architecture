@@ -1,0 +1,35 @@
+{
+  "name": "sol-cnft-mint-architecture-request-producer",
+  "version": "1.0.0",
+  "description": "An efficient architecture to mint Solana compressed NFTs - Mint request producer",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test",
+    "single-message": "npx ts-node send-mint-message.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicoSix/sol-cnft-mint-architecture.git"
+  },
+  "keywords": [
+    "solana",
+    "nft",
+    "cnft",
+    "blockchain",
+    "typescript",
+    "rabbitmq"
+  ],
+  "author": "Nicolas Six",
+  "license": "AGPL-3.0-only",
+  "bugs": {
+    "url": "https://github.com/nicoSix/sol-cnft-mint-architecture/issues"
+  },
+  "homepage": "https://github.com/nicoSix/sol-cnft-mint-architecture#readme",
+  "dependencies": {
+    "@types/amqplib": "^0.10.1",
+    "amqplib": "^0.10.3"
+  },
+  "devDependencies": {
+    "typescript": "^5.1.6"
+  }
+}
