@@ -27,6 +27,7 @@
   "homepage": "https://github.com/nicoSix/sol-cnft-mint-architecture#readme",
   "dependencies": {
     "@metaplex-foundation/mpl-bubblegum": "^0.7.0",
+    "@metaplex-foundation/mpl-token-metadata": "^2.13.0",
     "@solana/web3.js": "^1.78.3",
     "amqplib": "^0.10.3",
     "express": "^4.18.2"

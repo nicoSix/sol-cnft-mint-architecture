@@ -1,7 +1,8 @@
 import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
 
-import mintController from './application/mintController';
+import collectionController from './application/collectionController';
+import demoController from './application/demoController';
 
 import { formatLog } from './utils';
 
@@ -15,7 +16,8 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.use(express.json());
-app.use(mintController);
+app.use(collectionController);
+app.use(demoController);
 
 app.listen(port, () => {
   console.log(formatLog(`Server is running at http://localhost:${port}`));
