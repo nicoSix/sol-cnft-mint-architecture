@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npm test",
-    "start": "nodemon"
+    "single-message": "npx ts-node send-mint-message.ts"
   },
   "repository": {
     "type": "git",
@@ -26,15 +26,10 @@
   },
   "homepage": "https://github.com/nicoSix/sol-cnft-mint-architecture#readme",
   "dependencies": {
-    "@metaplex-foundation/mpl-bubblegum": "^0.7.0",
-    "@solana/web3.js": "^1.78.3",
-    "amqplib": "^0.10.3",
-    "express": "^4.18.2"
+    "@types/amqplib": "^0.10.1",
+    "amqplib": "^0.10.3"
   },
   "devDependencies": {
-    "@types/amqplib": "^0.10.1",
-    "@types/express": "^4.17.17",
-    "nodemon": "^3.0.1",
     "typescript": "^5.1.6"
   }
 }
