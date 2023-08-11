@@ -2,7 +2,7 @@
   "name": "sol-cnft-mint-architecture-request-producer",
   "version": "1.0.0",
   "description": "An efficient architecture to mint Solana compressed NFTs - Mint request producer",
-  "main": "index.js",
+  "main": "app.ts",
   "scripts": {
     "test": "npm test",
     "start": "nodemon"

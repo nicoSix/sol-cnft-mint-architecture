@@ -48,12 +48,12 @@ export default class QueueSender {
     try {
       if (this.channel) {
         this.channel.assertQueue(queue_name, {
-          durable: false
+          durable: true
         });
     
-        this.channel.sendToQueue(queue_name, payload);
+        this.channel.sendToQueue(queue_name, payload, { persistent: true });
     
-        console.log(formatLog(`Request message sent to queue ${queue_name}.`));
+        console.log(formatLog(`Request message sent to queue ${queue_name}`));
       }
     } catch (e: any) {
       console.warn(formatLog(e));

@@ -11,7 +11,7 @@ dotenv.config();
 const app: Express = express();
 const port = process.env.PRODUCER_PORT;
 
-app.get('/', (req: Request, res: Response) => {
+app.get('/', (_: Request, res: Response) => {
   res.send('Server is up and running!');
 });
 
