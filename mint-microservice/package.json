@@ -1,11 +1,11 @@
 {
-  "name": "sol-cnft-mint-architecture-request-producer",
+  "name": "sol-cnft-mint-architecture-mint-microservice",
   "version": "1.0.0",
-  "description": "An efficient architecture to mint Solana compressed NFTs - Mint request producer",
-  "main": "index.js",
+  "description": "An efficient architecture to mint Solana compressed NFTs - Mint microservice",
+  "main": "app.ts",
   "scripts": {
     "test": "npm test",
-    "single-message": "npx ts-node send-mint-message.ts"
+    "start": "nodemon"
   },
   "repository": {
     "type": "git",
@@ -26,10 +26,14 @@
   },
   "homepage": "https://github.com/nicoSix/sol-cnft-mint-architecture#readme",
   "dependencies": {
+    "@metaplex-foundation/mpl-bubblegum": "^0.7.0",
+    "@solana/web3.js": "^1.78.4",
     "@types/amqplib": "^0.10.1",
     "amqplib": "^0.10.3"
   },
   "devDependencies": {
+    "@types/amqplib": "^0.10.1",
+    "nodemon": "^3.0.1",
     "typescript": "^5.1.6"
   }
 }
