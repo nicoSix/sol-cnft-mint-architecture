@@ -1,13 +1,9 @@
-import {
-    MetadataArgs
-} from "@metaplex-foundation/mpl-bubblegum";
+import { MetadataArgs } from "@metaplex-foundation/mpl-bubblegum";
 
-import {
-    PublicKey
-} from "@solana/web3.js";
+import { PublicKey } from "@solana/web3.js";
 
 export type MintRequest = {
-    walletAddress: PublicKey;
-    collectionAddress: PublicKey;
-    nftMetadata: MetadataArgs;
-}
+  walletAddress: PublicKey;
+  collectionAddress: PublicKey;
+  nftMetadata: MetadataArgs;
+};
