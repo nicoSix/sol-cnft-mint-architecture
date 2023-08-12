@@ -1,3 +1,3 @@
 export const formatLog = (msg: string) => {
-    return `[Producer] [${new Date().toTimeString()}]: ${msg}`;
-}
+  return `[Producer] [${new Date().toTimeString()}]: ${msg}`;
+};

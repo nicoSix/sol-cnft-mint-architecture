@@ -6,30 +6,30 @@ import { CreateCollectionRequest } from "../domain/CreateCollectionRequest";
 
 const router = Router();
 
-router.post('/collection/:collection/mint', async function(req, res) {
-    const mintRequest: MintRequest = req.body;
-    console.log(formatLog(`Received request to mint NFT: ${JSON.stringify(req.body)}`))
+router.post("/collection/:collection/mint", async function (req, res) {
+  const mintRequest: MintRequest = req.body;
+  console.log(formatLog(`Received request to mint NFT: ${JSON.stringify(req.body)}`));
 
-    const queueSender = new QueueSender();
+  const queueSender = new QueueSender();
 
-    await queueSender.openChannel();
-    queueSender.sendMintRequestMessage(mintRequest);
-    await queueSender.closeChannel();
+  await queueSender.openChannel();
+  queueSender.sendMintRequestMessage(mintRequest);
+  await queueSender.closeChannel();
 
-    res.status(200).send();
+  res.status(200).send();
 });
 
-router.post('/collection', async function(req, res) {
-    const collectionRequest: CreateCollectionRequest = req.body;
-    console.log(formatLog(`Received request to create NFT collection: ${JSON.stringify(req.body)}`))
+router.post("/collection", async function (req, res) {
+  const collectionRequest: CreateCollectionRequest = req.body;
+  console.log(formatLog(`Received request to create NFT collection: ${JSON.stringify(req.body)}`));
 
-    const queueSender = new QueueSender();
-    
-    await queueSender.openChannel();
-    queueSender.sendCollectionRequestMessage(collectionRequest);
-    await queueSender.closeChannel();
-    
-    res.status(200).send();
+  const queueSender = new QueueSender();
+
+  await queueSender.openChannel();
+  queueSender.sendCollectionRequestMessage(collectionRequest);
+  await queueSender.closeChannel();
+
+  res.status(200).send();
 });
 
 export default router;

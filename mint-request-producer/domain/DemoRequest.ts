@@ -1,4 +1,4 @@
 export type DemoRequest = {
-    nftsToMint: number;
-    throughput: number;
-}
+  nftsToMint: number;
+  throughput: number;
+};

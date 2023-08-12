@@ -2,15 +2,15 @@
 
 import amqp from "amqplib";
 
-import { MintRequest } from '../domain/MintRequest';
-import { formatLog } from '../utils';
+import { MintRequest } from "../domain/MintRequest";
+import { formatLog } from "../utils";
 import { CreateCollectionRequest } from "../domain/CreateCollectionRequest";
 
 const MINT_QUEUE_NAME = process.env.MINT_QUEUE_NAME || "mint-request-queue";
 const COLLECTION_QUEUE_NAME = process.env.COLLECTION_QUEUE_NAME || "collection-request-queue";
 const QUEUE_URL = process.env.QUEUE_URL || "amqp://localhost";
 
-const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export default class QueueSender {
   queue_url: string;
@@ -43,28 +43,28 @@ export default class QueueSender {
       throw "Cannot close already closed channel or connection.";
     }
   }
-  
+
   _sendMessage(payload: Buffer, queue_name: string) {
     try {
       if (this.channel) {
         this.channel.assertQueue(queue_name, {
-          durable: true
+          durable: true,
         });
-    
+
         this.channel.sendToQueue(queue_name, payload, { persistent: true });
-    
+
         console.log(formatLog(`Request message sent to queue ${queue_name}`));
       }
-    } catch (e: any) {
-      console.warn(formatLog(e));
+    } catch (e) {
+      console.warn(formatLog(e as string));
     }
   }
 
   sendMintRequestMessage(request: MintRequest) {
-    this._sendMessage(Buffer.from(JSON.stringify(request)), MINT_QUEUE_NAME)
+    this._sendMessage(Buffer.from(JSON.stringify(request)), MINT_QUEUE_NAME);
   }
 
   sendCollectionRequestMessage(request: CreateCollectionRequest) {
-    this._sendMessage(Buffer.from(JSON.stringify(request)), COLLECTION_QUEUE_NAME)
+    this._sendMessage(Buffer.from(JSON.stringify(request)), COLLECTION_QUEUE_NAME);
   }
 }
