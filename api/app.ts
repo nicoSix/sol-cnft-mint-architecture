@@ -2,7 +2,6 @@ import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 
 import collectionController from "./application/collectionController";
-import demoController from "./application/demoController";
 
 import { formatLog } from "./utils";
 
@@ -17,7 +16,6 @@ app.get("/", (_: Request, res: Response) => {
 
 app.use(express.json());
 app.use(collectionController);
-app.use(demoController);
 
 app.listen(port, () => {
   console.log(formatLog(`Server is running at http://localhost:${port}`));

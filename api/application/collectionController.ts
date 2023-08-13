@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { MintRequest } from "../domain/MintRequest";
-import QueueSender from "../infrastructure/queueSender";
+import QueueSender, { RequestType } from "../infrastructure/queueSender";
 import { formatLog } from "../utils";
 import { CreateCollectionRequest } from "../domain/CreateCollectionRequest";
 
@@ -13,7 +13,7 @@ router.post("/collection/:collection/mint", async function (req, res) {
   const queueSender = new QueueSender();
 
   await queueSender.openChannel();
-  queueSender.sendMintRequestMessage(mintRequest);
+  queueSender.sendRequestMessage(RequestType.MINT, mintRequest);
   await queueSender.closeChannel();
 
   res.status(200).send();
@@ -26,7 +26,7 @@ router.post("/collection", async function (req, res) {
   const queueSender = new QueueSender();
 
   await queueSender.openChannel();
-  queueSender.sendCollectionRequestMessage(collectionRequest);
+  queueSender.sendRequestMessage(RequestType.CREATE_COLLECTION, collectionRequest);
   await queueSender.closeChannel();
 
   res.status(200).send();

@@ -4,7 +4,7 @@ import amqp, { Message } from "amqplib";
 
 import { formatLog } from "../utils";
 
-const MINT_QUEUE_NAME = process.env.MINT_QUEUE_NAME || "mint-request-queue";
+const MINT_QUEUE_NAME = process.env.MINT_QUEUE_NAME || "blockchain-request-queue";
 const QUEUE_URL = process.env.QUEUE_URL || "amqp://localhost";
 const PREFETCH_NB = parseInt(process.env.PREFETCH_NB!) || 3;
 

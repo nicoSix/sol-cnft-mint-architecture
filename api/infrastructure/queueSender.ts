@@ -6,11 +6,15 @@ import { MintRequest } from "../domain/MintRequest";
 import { formatLog } from "../utils";
 import { CreateCollectionRequest } from "../domain/CreateCollectionRequest";
 
-const MINT_QUEUE_NAME = process.env.MINT_QUEUE_NAME || "mint-request-queue";
-const COLLECTION_QUEUE_NAME = process.env.COLLECTION_QUEUE_NAME || "collection-request-queue";
+const QUEUE_NAME = process.env.QUEUE_NAME || "blockchain-request-queue";
 const QUEUE_URL = process.env.QUEUE_URL || "amqp://localhost";
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+export enum RequestType {
+  MINT = "mint",
+  CREATE_COLLECTION = "create-collection"
+}
 
 export default class QueueSender {
   queue_url: string;
@@ -44,27 +48,22 @@ export default class QueueSender {
     }
   }
 
-  _sendMessage(payload: Buffer, queue_name: string) {
+  sendRequestMessage(type: RequestType, payload: MintRequest | CreateCollectionRequest) {
     try {
       if (this.channel) {
-        this.channel.assertQueue(queue_name, {
+        this.channel.assertQueue(QUEUE_NAME, {
           durable: true,
         });
 
-        this.channel.sendToQueue(queue_name, payload, { persistent: true });
+        this.channel.sendToQueue(QUEUE_NAME, Buffer.from(JSON.stringify({
+          type,
+          payload
+        })), { persistent: true });
 
-        console.log(formatLog(`Request message sent to queue ${queue_name}`));
+        console.log(formatLog(`Request message sent to queue ${QUEUE_NAME}`));
       }
     } catch (e) {
       console.warn(formatLog(e as string));
     }
-  }
-
-  sendMintRequestMessage(request: MintRequest) {
-    this._sendMessage(Buffer.from(JSON.stringify(request)), MINT_QUEUE_NAME);
-  }
-
-  sendCollectionRequestMessage(request: CreateCollectionRequest) {
-    this._sendMessage(Buffer.from(JSON.stringify(request)), COLLECTION_QUEUE_NAME);
   }
 }
