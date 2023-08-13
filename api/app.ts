@@ -1,7 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 
-import collectionController from "./application/collectionController";
+import collectionController from "./application/collection";
 
 import { formatLog } from "./utils";
 
