@@ -11,18 +11,20 @@ const QUEUE_URL = process.env.QUEUE_URL || "amqp://localhost";
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
+let queueSender: QueueSender;
+
 export enum RequestType {
   MINT = "mint",
-  CREATE_COLLECTION = "create-collection"
+  CREATE_COLLECTION = "create-collection",
 }
 
-export default class QueueSender {
+class QueueSender {
   queue_url: string;
   channel: amqp.Channel | null = null;
   connection: amqp.Connection | null = null;
 
-  constructor(queue_url: string = QUEUE_URL) {
-    this.queue_url = queue_url;
+  constructor() {
+    this.queue_url = QUEUE_URL;
   }
 
   async openChannel() {
@@ -55,10 +57,16 @@ export default class QueueSender {
           durable: true,
         });
 
-        this.channel.sendToQueue(QUEUE_NAME, Buffer.from(JSON.stringify({
-          type,
-          payload
-        })), { persistent: true });
+        this.channel.sendToQueue(
+          QUEUE_NAME,
+          Buffer.from(
+            JSON.stringify({
+              type,
+              payload,
+            }),
+          ),
+          { persistent: true },
+        );
 
         console.log(formatLog(`Request message sent to queue ${QUEUE_NAME}`));
       }
@@ -67,3 +75,14 @@ export default class QueueSender {
     }
   }
 }
+
+const getQueueSender = async (): Promise<QueueSender> => {
+  if (!queueSender) {
+    queueSender = new QueueSender();
+    await queueSender.openChannel();
+  }
+
+  return queueSender;
+};
+
+export default getQueueSender;
