@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { MintRequest } from "../domain/MintRequest";
-import QueueSender, { RequestType } from "../infrastructure/queueSender";
+import QueueSender, { RequestType } from "../infrastructure/QueueSender";
 import { formatLog } from "../utils";
 import { CreateCollectionRequest } from "../domain/CreateCollectionRequest";
 

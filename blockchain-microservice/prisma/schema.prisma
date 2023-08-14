@@ -1,0 +1,43 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Collection {
+  id                    Int       @id @default(autoincrement())
+  tree_address          String    @db.VarChar(128)
+  mint_address          String    @db.VarChar(128)
+  metadata_address      String    @db.VarChar(128)
+  master_edition_address String    @db.VarChar(128)
+  owner_address         String    @db.VarChar(128)
+  metadata              Json
+  size                  Int
+  nb_minted             Int
+  tokens                Token[]
+  
+  @@map(name: "collection")
+}
+
+model Token {
+  token_id      Int     @id
+  metadata      Json
+  collection_id Int
+  
+  collection    Collection @relation(fields: [collection_id], references: [id])
+  
+  @@map(name: "tokens")
+}
+
+model Account {
+  public_address String   @id @db.VarChar(128)
+  private_key    String   @db.VarChar(128)
+  
+  @@map(name: "accounts")
+}

@@ -128,3 +128,6 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Prisma migration folder should be committed in a real env
+*/prisma/migrations

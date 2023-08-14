@@ -1,4 +1,4 @@
-import QueueReceiver from "./infrastructure/queueReceiver";
+import QueueReceiver from "./infrastructure/QueueReceiver";
 import { formatLog } from "./utils";
 import { CreateCollectionRequest } from "./domain/CreateCollectionRequest";
 import { MintRequest } from "./domain/MintRequest";
