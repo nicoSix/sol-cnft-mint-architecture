@@ -12,32 +12,32 @@ datasource db {
 
 model Collection {
   id                    Int       @id @default(autoincrement())
-  tree_address          String    @db.VarChar(128)
-  mint_address          String    @db.VarChar(128)
-  metadata_address      String    @db.VarChar(128)
-  master_edition_address String    @db.VarChar(128)
-  owner_address         String    @db.VarChar(128)
+  treeAddress          String    @db.VarChar(128)
+  mintAddress          String    @db.VarChar(128)
+  metadataAddress      String    @db.VarChar(128)
+  masterEditionAddress String    @db.VarChar(128)
+  ownerAddress         String    @db.VarChar(128)
   metadata              Json
   size                  Int
-  nb_minted             Int
+  nbMinted             Int       @default(0)
   tokens                Token[]
   
   @@map(name: "collection")
 }
 
 model Token {
-  token_id      Int     @id
+  tokenId      Int     @id
   metadata      Json
-  collection_id Int
+  collectionId Int
   
-  collection    Collection @relation(fields: [collection_id], references: [id])
+  collection    Collection @relation(fields: [collectionId], references: [id])
   
   @@map(name: "tokens")
 }
 
 model Account {
-  public_address String   @id @db.VarChar(128)
-  private_key    String   @db.VarChar(128)
+  publicAddress String   @id @db.VarChar(128)
+  privateKey    String   @db.VarChar(128)
   
   @@map(name: "accounts")
 }

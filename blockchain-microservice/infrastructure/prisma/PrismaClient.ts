@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 
 let prismaClientWrapper: PrismaClientWrapper;
 
-class PrismaClientWrapper {
+export class PrismaClientWrapper {
   client: PrismaClient;
 
   constructor() {

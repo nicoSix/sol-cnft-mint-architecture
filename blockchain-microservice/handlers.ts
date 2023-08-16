@@ -1,5 +1,5 @@
 import getQueueReceiver from "./infrastructure/QueueReceiver";
-import getPrismaClient from "./infrastructure/PrismaClient";
+import getPrismaClient from "./infrastructure/prisma/PrismaClient";
 
 import { formatLog } from "./utils";
 

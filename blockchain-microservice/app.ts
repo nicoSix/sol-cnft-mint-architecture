@@ -1,11 +1,14 @@
-import getQueueReceiver from "./infrastructure/QueueReceiver";
+import getQueueReceiver, { QueueMessage } from "./infrastructure/QueueReceiver";
 import { formatLog } from "./utils";
-import { CreateCollectionRequest } from "./domain/CreateCollectionRequest";
-import { MintRequest } from "./domain/MintRequest";
 import registerHandlers from "./handlers";
+import * as CreateCollection from "./usecases/CreateCollection";
+import { CreateCollectionRequest } from "./domain/Collection";
 
-const processMessage = async (msg: CreateCollectionRequest | MintRequest) => {
-  console.log(msg);
+const processMessage = async (msg: QueueMessage) => {
+  switch (msg.type) {
+    case "create-collection":
+      await CreateCollection.execute(msg.payload as CreateCollectionRequest);
+  }
 };
 
 const main = async () => {

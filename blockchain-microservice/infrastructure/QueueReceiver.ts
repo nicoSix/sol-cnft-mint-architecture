@@ -3,8 +3,8 @@
 import amqp, { Message } from "amqplib";
 
 import { formatLog } from "../utils";
-import { CreateCollectionRequest } from "../domain/CreateCollectionRequest";
-import { MintRequest } from "../domain/MintRequest";
+import { CreateCollectionRequest } from "../domain/Collection";
+import { MintRequest } from "../domain/Mint";
 
 const MINT_QUEUE_NAME = process.env.MINT_QUEUE_NAME || "blockchain-request-queue";
 const QUEUE_URL = process.env.QUEUE_URL || "amqp://localhost";
@@ -13,6 +13,11 @@ const PREFETCH_NB = parseInt(process.env.PREFETCH_NB!) || 3;
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 let queueReceiver: QueueReceiver;
+
+export type QueueMessage = {
+  type: string;
+  payload: CreateCollectionRequest | MintRequest;
+};
 
 class QueueReceiver {
   queue_url: string;
@@ -46,9 +51,7 @@ class QueueReceiver {
     }
   }
 
-  consumeMessages(
-    callbackOnMessage: (msg: CreateCollectionRequest | MintRequest) => Promise<void>,
-  ) {
+  consumeMessages(callbackOnMessage: (msg: QueueMessage) => Promise<void>) {
     try {
       if (this.channel) {
         this.channel.assertQueue(MINT_QUEUE_NAME, {
@@ -67,7 +70,7 @@ class QueueReceiver {
           async (msg: amqp.ConsumeMessage | null) => {
             if (msg) {
               console.log(formatLog(`Message received on queue ${MINT_QUEUE_NAME}`));
-              await callbackOnMessage(JSON.parse(msg.content.toString()));
+              await callbackOnMessage(JSON.parse(msg.content.toString()) as QueueMessage);
               console.log(formatLog(`Message processed on queue ${MINT_QUEUE_NAME}`));
               this.channel!.ack(msg as Message);
             }

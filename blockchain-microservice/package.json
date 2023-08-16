@@ -27,16 +27,22 @@
   },
   "homepage": "https://github.com/nicoSix/sol-cnft-mint-architecture#readme",
   "dependencies": {
+    "@metaplex-foundation/js": "^0.19.4",
     "@metaplex-foundation/mpl-bubblegum": "^0.7.0",
     "@prisma/client": "^5.1.1",
+    "@solana/spl-account-compression": "^0.1.10",
+    "@solana/spl-token": "^0.3.8",
     "@solana/web3.js": "^1.78.4",
     "@types/amqplib": "^0.10.1",
-    "amqplib": "^0.10.3"
+    "amqplib": "^0.10.3",
+    "bs58": "^5.0.0"
   },
   "devDependencies": {
     "@types/amqplib": "^0.10.1",
+    "@types/bn.js": "^5.1.1",
     "@types/eslint-config-prettier": "^6.11.0",
     "@types/node": "^20.5.0",
+    "@types/node-fetch": "^2.6.4",
     "@typescript-eslint/eslint-plugin": "^6.3.0",
     "@typescript-eslint/parser": "^6.3.0",
     "eslint": "^8.47.0",
