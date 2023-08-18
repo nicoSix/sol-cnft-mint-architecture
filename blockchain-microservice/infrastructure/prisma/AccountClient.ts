@@ -23,4 +23,20 @@ export default class AccountClient {
     const accounts = await this.wrapper.client.account.findMany();
     return this._shuffleArray(accounts)[0];
   }
+
+  async getAccountFromCollection(collectionId: number): Promise<Account> {
+    const collection = await this.wrapper.client.collection.findUniqueOrThrow({
+      where: {
+        id: collectionId,
+      },
+    });
+
+    const account = await this.wrapper.client.account.findUniqueOrThrow({
+      where: {
+        publicAddress: collection?.ownerAddress,
+      },
+    });
+
+    return account;
+  }
 }

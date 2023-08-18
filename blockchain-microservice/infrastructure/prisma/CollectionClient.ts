@@ -1,4 +1,4 @@
-import { Collection } from "../../domain/Collection";
+import { CollectionData } from "../../domain/Collection";
 import getPrismaClientWrapper, { PrismaClientWrapper } from "./PrismaClient";
 
 export default class CollectionClient {
@@ -8,13 +8,13 @@ export default class CollectionClient {
     this.wrapper = getPrismaClientWrapper();
   }
 
-  async saveCollection(collection: Collection) {
+  async saveCollection(collection: CollectionData) {
     await this.wrapper.client.collection.create({ data: collection });
   }
 
-  async getCollection(collectionId: number): Promise<Collection> {
-    return (await this.wrapper.client.collection.findFirstOrThrow({
+  async getCollection(collectionId: number): Promise<CollectionData> {
+    return (await this.wrapper.client.collection.findUniqueOrThrow({
       where: { id: collectionId },
-    })) as Collection;
+    })) as CollectionData;
   }
 }

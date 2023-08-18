@@ -22,14 +22,14 @@ model Collection {
   nbMinted             Int       @default(0)
   tokens                Token[]
   
-  @@map(name: "collection")
+  @@map(name: "collections")
 }
 
 model Token {
   tokenId      Int     @id
   metadata      Json
   collectionId Int
-  
+  ownerAddress         String    @db.VarChar(128)
   collection    Collection @relation(fields: [collectionId], references: [id])
   
   @@map(name: "tokens")

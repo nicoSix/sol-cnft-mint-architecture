@@ -1,7 +1,8 @@
 import { MetadataArgs } from "@metaplex-foundation/mpl-bubblegum";
 
-export type MintRequest = {
-  walletAddress: string;
+export type TokenData = {
   collectionId: number;
+  tokenId: number;
+  ownerAddress: string;
   metadata: MetadataArgs;
 };

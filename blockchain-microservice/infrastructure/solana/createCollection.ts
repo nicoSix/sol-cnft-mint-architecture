@@ -199,9 +199,9 @@ const deployCollection = async (
     });
 
     console.log(formatLog(`Collection successfully created: ${explorerURL({ txSignature })}`));
-  } catch (err) {
+  } catch (err: any) {
     console.error(formatLog("Failed to create collection:\n"));
-    console.error(formatLog(err as string));
+    console.error(formatLog(err.toString()));
 
     await extractSignatureFromFailedTransaction(connection, err);
 

@@ -5,7 +5,7 @@ export type CreateCollectionRequest = {
   metadata: CreateMetadataAccountArgsV3;
 };
 
-export type Collection = {
+export type CollectionData = {
   treeAddress: string;
   mintAddress: string;
   metadataAddress: string;
