@@ -55,5 +55,5 @@ export function explorerURL({
   // auto append the desired search params
   const url = new URL(baseUrl);
   url.searchParams.append("cluster", cluster || "devnet");
-  return url.toString() + "\n";
+  return url.toString();
 }
