@@ -29,6 +29,7 @@ import { explorerURL, extractSignatureFromFailedTransaction } from "./helpers";
 import { WrapperConnection } from "./WrapperConnection";
 import bs58 from "bs58";
 
+// Function from PR by nickfrosty: https://github.com/solana-labs/solana-program-library/pull/4658
 function getAllChangeLogEventV1FromTransaction(
   txResponse: TransactionResponse | VersionedTransactionResponse,
   noopProgramId: PublicKey = SPL_NOOP_PROGRAM_ID,
@@ -59,6 +60,7 @@ function getAllChangeLogEventV1FromTransaction(
   return changeLogEvents;
 }
 
+// Function from https://github.com/solana-developers/compressed-nfts/tree/master
 async function mintCompressedNFT(
   connection: Connection,
   payer: Keypair,

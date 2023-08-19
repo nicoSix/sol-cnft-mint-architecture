@@ -44,6 +44,7 @@ type CollectionPublicKeys = {
   masterEdition: PublicKey;
 };
 
+// Functions from https://github.com/solana-developers/compressed-nfts/tree/master
 const getClosestDepthSize = (size: number): ValidDepthSizePair => {
   const depthSizes = ALL_DEPTH_SIZE_PAIRS.sort((a, b) => a.maxDepth - b.maxDepth);
 
