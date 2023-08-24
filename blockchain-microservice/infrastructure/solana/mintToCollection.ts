@@ -94,6 +94,7 @@ async function mintCompressedNFT(
         share: 100,
       },
     ],
+    name: `Test ${Math.random()}`
   });
 
   mintIxs.push(

@@ -8,7 +8,7 @@ import { MintRequest } from "../domain/Mint";
 
 const MINT_QUEUE_NAME = process.env.MINT_QUEUE_NAME || "blockchain-request-queue";
 const QUEUE_URL = process.env.QUEUE_URL || "amqp://localhost";
-const PREFETCH_NB = parseInt(process.env.PREFETCH_NB!) || 3;
+const PREFETCH_NB = parseInt(process.env.PREFETCH_NB!) || 1;
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 

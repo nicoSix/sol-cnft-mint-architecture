@@ -17,6 +17,7 @@ export async function execute(request: MintRequest) {
     request.walletAddress,
     request.metadata,
   );
+  console.log(`Token ID: ${tokenId}`)
   const token: TokenData = {
     collectionId: request.collectionId,
     tokenId,
